@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sample_app/res/constants/color_constants.dart';
+import 'package:sample_app/res/constants/string_constants.dart';
 import 'package:sample_app/viewModel/loginViewModel.dart';
-import 'package:sample_app/viewModel/otpViewModel.dart';
-import 'package:sample_app/viewModel/resetPasswordViewModel.dart';
-import 'package:sample_app/viewModel/setMpinViewModel.dart';
-import 'package:sample_app/viewModel/validateMpinViewModel.dart';
-import 'utils/AppColors/colors.dart';
-import 'utils/Routes/appPages.dart';
-import 'utils/Routes/appRoutes.dart';
-import 'utils/Strings/strings.dart';
-import 'viewModel/loginWithMobileViewModel.dart';
+import 'res/routes/app_pages.dart';
+import 'res/routes/app_routes.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,20 +17,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LoginWithMobileViewModel()),
-        ChangeNotifierProvider(create: (_) => LoginViewModel()),
-        ChangeNotifierProvider(create: (_) => ResetPasswordModel()),
-        ChangeNotifierProvider(create: (_) => OtpViewModel()),
-        ChangeNotifierProvider(create: (_) => SetMpinViewModel()),
-        ChangeNotifierProvider(create: (_) => ValidateMpinViewModel()),
+      
+         ChangeNotifierProvider(create: (_) => LoginViewModel()),
+     
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: AppStrings.title,
+        title: AppStrings.appName,
         initialRoute: AppRoutes.initial,
         routes: AppPages.routes,
         theme: ThemeData(
-          primarySwatch: AppColors.navy,
+          primarySwatch: AppColors.appbarSwatch,
         ),
       ),
     );
