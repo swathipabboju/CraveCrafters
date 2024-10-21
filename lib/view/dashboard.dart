@@ -51,32 +51,6 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: Stack(children: [
         // const SizedBox(width: 30),
-
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                AppStrings.appName.toUpperCase(),
-                style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white),
-              ),
-              const Text(
-                AppStrings.appName,
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white),
-              ),
-            ],
-          ),
-        ),
-
         HorizontalImageCarousel()
       ]), /*   bottomNavigationBar: const FooterComponent() */
     );

@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sample_app/res/constants/color_constants.dart';
 import 'package:sample_app/res/constants/string_constants.dart';
 import 'package:sample_app/res/constants/text_styles.dart';
+import 'package:sample_app/res/reusable_widgets/food_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'; // Import for smooth indicators
 import 'package:sample_app/res/app_assets/assetpath.dart';
 
@@ -58,18 +59,17 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
               );
             },
             options: CarouselOptions(
-              pageSnapping: true,
-              // height: 200.0, // Height of the carousel
-              autoPlay: true, // Auto-scroll feature
-              enlargeCenterPage: true, // Highlight the center item
-              enableInfiniteScroll: true, // Loop the carousel infinitely
-              scrollDirection: Axis.horizontal, // Horizontal scrolling
-              onPageChanged: (index, reason) {
-                setState(() {
-                  currentIndex = index; // Update the current index
-                });
-              }
-            ),
+                pageSnapping: true,
+                // height: 200.0, // Height of the carousel
+                autoPlay: true, // Auto-scroll feature
+                enlargeCenterPage: true, // Highlight the center item
+                enableInfiniteScroll: true, // Loop the carousel infinitely
+                scrollDirection: Axis.horizontal, // Horizontal scrolling
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    currentIndex = index; // Update the current index
+                  });
+                }),
           ),
           SizedBox(height: 16.0),
           Align(
@@ -83,6 +83,17 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
                 activeDotColor: AppColors.black, // Active dot color
                 dotColor: Colors.grey, // Inactive dot color
               ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: imageUrls.length,
+              itemBuilder: (context, imageurlIndex) {
+                return IndividualFoodItem(
+                  imageUrls: imageUrls,
+                  index: imageurlIndex,
+                ); // Replace with your item widget
+              },
             ),
           ),
         ],
