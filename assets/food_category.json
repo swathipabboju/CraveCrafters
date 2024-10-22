@@ -1,0 +1,25 @@
+{
+    "foodCategories": [
+      {
+        "id": "1",
+        "name": "pizza"
+      },
+      {
+        "id": "2",
+        "name": "biryani"
+      },
+      {
+        "id": "3",
+        "name": "Desserts"
+      },
+      {
+        "id": "4",
+        "name": "rotis"
+      },
+      {
+        "id": "5",
+        "name": "drinks"
+      }
+    ]
+  }
+  

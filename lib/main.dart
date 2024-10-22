@@ -6,7 +6,6 @@ import 'package:sample_app/viewModel/dashboard_view_model.dart';
 import 'res/routes/app_pages.dart';
 import 'res/routes/app_routes.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -17,9 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-      
-         ChangeNotifierProvider(create: (_) => DashboardViewModel()),
-     
+        ChangeNotifierProvider(create: (_) => DashboardViewModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

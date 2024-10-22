@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sample_app/model/food_items_details.dart';
 import 'package:sample_app/res/app_assets/assetpath.dart';
 import 'package:sample_app/res/constants/color_constants.dart';
+import 'package:sample_app/res/constants/text_styles.dart';
 import 'package:sample_app/res/reusable_widgets/text_widget.dart';
 
 class IndividualFoodItem extends StatefulWidget {
@@ -16,6 +17,7 @@ class _IndividualFoodItemState extends State<IndividualFoodItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 10,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -23,19 +25,24 @@ class _IndividualFoodItemState extends State<IndividualFoodItem> {
           children: [
             Expanded(
                 child: Image.network(
-                    widget.imageUrls?[widget.index].imageUrl ?? "",
-                     errorBuilder: (context, error, stackTrace) {
-          return Image.asset(
-              AppAssets.AppIcon); // Local placeholder if the image fails to load
-        },)),
+              widget.imageUrls?[widget.index].imageUrl ?? "",
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(AppAssets
+                    .AppIcon); // Local placeholder if the image fails to load
+              },
+            )),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextWidget(
-                    msg: widget.imageUrls?[widget.index].name,
-                    header: true,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextWidget(
+                      msg: widget.imageUrls?[widget.index].name,
+                      align: TextAlign.center,
+                      textStyle: TextStyles.regular,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -46,7 +53,7 @@ class _IndividualFoodItemState extends State<IndividualFoodItem> {
                             textStyle: WidgetStateProperty.all(
                                 TextStyle(color: AppColors.black))),
                         child: TextWidget(
-                          msg: "\$${ widget.imageUrls?[widget.index].price}",
+                          msg: "\$${widget.imageUrls?[widget.index].price}",
                         ),
                       ),
                       TextWidget(
