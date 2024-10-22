@@ -1,0 +1,56 @@
+{
+  "restaurant": {
+    "name": "Gourmet Diner",
+    "menu": [
+      {
+        "id": 1,
+        "name": "Margherita Pizza",
+        "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
+        "price": 9.99,
+        "description": "Classic pizza with fresh tomatoes, mozzarella cheese, and basil."
+      },
+      {
+        "id": 2,
+        "name": "Spaghetti Carbonara",
+        "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
+        "price": 12.50,
+        "description": "Traditional Italian pasta with creamy sauce, pancetta, and parmesan."
+      },
+      {
+        "id": 3,
+        "name": "Caesar Salad",
+        "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
+        "price": 7.99,
+        "description": "Crisp romaine lettuce with Caesar dressing, croutons, and parmesan."
+      },
+      {
+        "id": 4,
+        "name": "Grilled Chicken Sandwich",
+        "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
+        "price": 10.49,
+        "description": "Juicy grilled chicken breast with lettuce, tomato, and aioli on a toasted bun."
+      },
+      {
+        "id": 5,
+        "name": "Chocolate Lava Cake",
+        "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
+        "price": 6.50,
+        "description": "Rich chocolate cake with a molten center, served with vanilla ice cream."
+      },
+      {
+        "id": 6,
+        "name": "Tandoori Chicken",
+        "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
+        "price": 13.99,
+        "description": "Spicy and flavorful chicken marinated in yogurt and spices, cooked in a tandoor."
+      },
+      {
+        "id": 7,
+        "name": "Vegan Buddha Bowl",
+        "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
+        "price": 11.50,
+        "description": "A wholesome bowl with quinoa, roasted veggies, avocado, and tahini dressing."
+      }
+    ]
+  }
+}

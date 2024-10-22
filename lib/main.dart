@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sample_app/res/constants/color_constants.dart';
 import 'package:sample_app/res/constants/string_constants.dart';
-import 'package:sample_app/viewModel/loginViewModel.dart';
+import 'package:sample_app/viewModel/dashboard_view_model.dart';
 import 'res/routes/app_pages.dart';
 import 'res/routes/app_routes.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
       
-         ChangeNotifierProvider(create: (_) => LoginViewModel()),
+         ChangeNotifierProvider(create: (_) => DashboardViewModel()),
      
       ],
       child: MaterialApp(
