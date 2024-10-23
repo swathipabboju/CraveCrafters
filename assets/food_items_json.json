@@ -7,49 +7,175 @@
         "name": "Margherita Pizza",
         "image_url": "https://wafflespizza.in/img/outlets/2652401_QFSSL_SupremePizza_00072-d910a935ba7d448e8c7545a963ed7101.jpg",
         "price": 9.99,
-        "description": "Classic pizza with fresh tomatoes, mozzarella cheese, and basil."
+        "description": "Classic pizza with fresh tomatoes, mozzarella cheese, and basil.",
+        "nutritional_info": [
+          {
+            "nutrition_name": "kcal",
+            "value": 270
+          },
+          {
+            "nutrition_name": "protein",
+            "value": 12
+          },
+          {
+            "nutrition_name": "fats",
+            "value": 9
+          },
+          {
+            "nutrition_name": "carbs",
+            "value": 35
+          }
+        ]
       },
       {
         "id": 2,
         "name": "Spaghetti Carbonara",
         "image_url": "https://www.foodandwine.com/thmb/pwFie7NRkq4SXMDJU6QKnUKlaoI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Ultimate-Veggie-Burgers-FT-Recipe-0821-5d7532c53a924a7298d2175cf1d4219f.jpg",
         "price": 12.50,
-        "description": "Traditional Italian pasta with creamy sauce, pancetta, and parmesan."
+        "description": "Traditional Italian pasta with creamy sauce, pancetta, and parmesan.",
+        "nutritional_info": [
+          {
+            "nutrition_name": "kcal",
+            "value": 400
+          },
+          {
+            "nutrition_name": "protein",
+            "value": 18
+          },
+          {
+            "nutrition_name": "fats",
+            "value": 16
+          },
+          {
+            "nutrition_name": "carbs",
+            "value": 45
+          }
+        ]
       },
       {
         "id": 3,
         "name": "Caesar Salad",
         "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
         "price": 7.99,
-        "description": "Crisp romaine lettuce with Caesar dressing, croutons, and parmesan."
+        "description": "Crisp romaine lettuce with Caesar dressing, croutons, and parmesan.",
+        "nutritional_info": [
+          {
+            "nutrition_name": "kcal",
+            "value": 180
+          },
+          {
+            "nutrition_name": "protein",
+            "value": 7
+          },
+          {
+            "nutrition_name": "fats",
+            "value": 10
+          },
+          {
+            "nutrition_name": "carbs",
+            "value": 15
+          }
+        ]
       },
       {
         "id": 4,
         "name": "Grilled Chicken Sandwich",
         "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
         "price": 10.49,
-        "description": "Juicy grilled chicken breast with lettuce, tomato, and aioli on a toasted bun."
+        "description": "Juicy grilled chicken breast with lettuce, tomato, and aioli on a toasted bun.",
+        "nutritional_info": [
+          {
+            "nutrition_name": "kcal",
+            "value": 420
+          },
+          {
+            "nutrition_name": "protein",
+            "value": 30
+          },
+          {
+            "nutrition_name": "fats",
+            "value": 18
+          },
+          {
+            "nutrition_name": "carbs",
+            "value": 40
+          }
+        ]
       },
       {
         "id": 5,
         "name": "Chocolate Lava Cake",
         "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
         "price": 6.50,
-        "description": "Rich chocolate cake with a molten center, served with vanilla ice cream."
+        "description": "Rich chocolate cake with a molten center, served with vanilla ice cream.",
+        "nutritional_info": [
+          {
+            "nutrition_name": "kcal",
+            "value": 350
+          },
+          {
+            "nutrition_name": "protein",
+            "value": 5
+          },
+          {
+            "nutrition_name": "fats",
+            "value": 20
+          },
+          {
+            "nutrition_name": "carbs",
+            "value": 45
+          }
+        ]
       },
       {
         "id": 6,
         "name": "Tandoori Chicken",
         "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
         "price": 13.99,
-        "description": "Spicy and flavorful chicken marinated in yogurt and spices, cooked in a tandoor."
+        "description": "Spicy and flavorful chicken marinated in yogurt and spices, cooked in a tandoor.",
+        "nutritional_info": [
+          {
+            "nutrition_name": "kcal",
+            "value": 350
+          },
+          {
+            "nutrition_name": "protein",
+            "value": 40
+          },
+          {
+            "nutrition_name": "fats",
+            "value": 15
+          },
+          {
+            "nutrition_name": "carbs",
+            "value": 10
+          }
+        ]
       },
       {
         "id": 7,
         "name": "Vegan Buddha Bowl",
         "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
         "price": 11.50,
-        "description": "A wholesome bowl with quinoa, roasted veggies, avocado, and tahini dressing."
+        "description": "A wholesome bowl with quinoa, roasted veggies, avocado, and tahini dressing.",
+        "nutritional_info": [
+          {
+            "nutrition_name": "kcal",
+            "value": 300
+          },
+          {
+            "nutrition_name": "protein",
+            "value": 12
+          },
+          {
+            "nutrition_name": "fats",
+            "value": 18
+          },
+          {
+            "nutrition_name": "carbs",
+            "value": 28
+          }
+        ]
       }
     ]
   }

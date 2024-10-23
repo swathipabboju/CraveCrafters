@@ -6,31 +6,39 @@ import 'package:sample_app/model/food_category_details.dart';
 import 'package:sample_app/model/food_items_details.dart';
 
 class DashboardViewModel with ChangeNotifier {
-  FoodItemsDeatils? foodItemsDeatils;
+  FoodItemsDetails? foodItemsDeatils;
   FoodCategoryDeatils? foodCategoryDeatils;
   List<Menu>? menuDeatilsList;
   List<FoodCategories>? categoryList;
-  int count = 0;
+  List<NutritionalInfo>? nutritionalInfoList;
+    List<Menu>? cartItemsList;
+  int? totalAmout;
+
+  int count = 1;
   onAddItem() {
     count++;
-
     notifyListeners();
   }
 
   onRemoveItem() {
     if (count > 0) {
       count--;
-    }else{
-      count =0;
+    } else {
+      count = 0;
     }
     notifyListeners();
+  }
+
+  getNutritionsInfo(Menu menu) {
+    nutritionalInfoList = menu.nutritionalInfo;
+    notifyListeners(); // Return an empty list if the index is out of range or menuDeatilsList is null
   }
 
   Future<void> loadRestaurantData() async {
     String jsonString =
         await rootBundle.loadString('assets/food_items_json.json');
     Map<String, dynamic> jsonData = json.decode(jsonString);
-    foodItemsDeatils = FoodItemsDeatils.fromJson(jsonData);
+    foodItemsDeatils = FoodItemsDetails.fromJson(jsonData);
     menuDeatilsList = foodItemsDeatils?.restaurant?.menu;
     notifyListeners();
   }
