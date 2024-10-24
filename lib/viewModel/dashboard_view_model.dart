@@ -11,7 +11,8 @@ class DashboardViewModel with ChangeNotifier {
   List<Menu>? menuDeatilsList;
   List<FoodCategories>? categoryList;
   List<NutritionalInfo>? nutritionalInfoList;
-    List<Menu>? cartItemsList;
+  List<Menu> cartItemsList =[];
+
   int? totalAmout;
 
   int count = 1;
@@ -49,6 +50,13 @@ class DashboardViewModel with ChangeNotifier {
     Map<String, dynamic> jsonData = json.decode(jsonString);
     foodCategoryDeatils = FoodCategoryDeatils.fromJson(jsonData);
     categoryList = foodCategoryDeatils?.foodCategories;
+    notifyListeners();
+  }
+
+  onAddToCart(Menu addedItem) {
+    
+  cartItemsList.add(addedItem);
+  debugPrint("added item ${cartItemsList.length}, item ${addedItem.toJson()}");
     notifyListeners();
   }
 }

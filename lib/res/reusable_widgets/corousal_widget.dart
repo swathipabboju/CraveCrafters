@@ -11,6 +11,7 @@ import 'package:sample_app/res/app_assets/assetpath.dart';
 import 'package:sample_app/res/reusable_widgets/item_counter.dart';
 import 'package:sample_app/res/reusable_widgets/nutritions_info_card.dart';
 import 'package:sample_app/res/reusable_widgets/tab_barr_view.dart';
+import 'package:sample_app/res/reusable_widgets/text_widget.dart';
 import 'package:sample_app/viewModel/dashboard_view_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -33,7 +34,9 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
   int currentIndex = 0; // Keep track of the current page index
 
   void showFoodItemDetails(
-      Menu menuItem, List<NutritionalInfo>? nutritionalInfo) {
+      Menu menuItem,
+      List<NutritionalInfo>? nutritionalInfo,
+      DashboardViewModel dashboardProvider) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true, // Allow scrolling
@@ -109,6 +112,7 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
                             child: ItemCounter(
                               selectedItem: menuItem,
                               ontap: () {
+                                dashboardProvider.onAddToCart(menuItem);
                                 Navigator.pop(context);
                                 showCustomToast(context);
                               },
@@ -187,7 +191,10 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
   }
 
   void showCartPageDetails() {
-    final dashboardProvider = Provider.of<DashboardViewModel>(context,listen: false);
+    final dashboardProvider =
+        Provider.of<DashboardViewModel>(context, listen: false);
+    debugPrint("cart item list ${dashboardProvider.cartItemsList?.length}");
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true, // Allow scrolling
@@ -195,109 +202,95 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: dashboardProvider.cartItemsList?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final item = dashboardProvider.cartItemsList?[index];
-                    return Card(
-                      elevation: 4,
-                      margin: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Item Image
-                            Image.network(
-                              item?.imageUrl.toString() ?? "",
-                              width: 80,
-                              height: 80,
-                              fit: BoxFit.cover,
-                            ),
-                            // Item Details
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      item?.name.toString() ?? "",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      '\$${item?.price?.toStringAsFixed(2)}',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            // Item Counter and Total Price per Item
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                ItemCounter(),
-                                const SizedBox(height: 8),
-                                Text(
-                                  'Total: \$${(item?.price?.toInt() ?? 0) * (item?.price?.toInt() ?? 0)}',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+          child: Card(
+            child: Column(
+              mainAxisSize: MainAxisSize.min, // Use min size to avoid overflow
+              children: [
+                TextWidget(
+                  msg: AppStrings.cartMsg,
+                  textStyle: TextStyles.header,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextWidget(
+                        msg: AppStrings.address,
                       ),
-                    );
+                      TextWidget(
+                        msg: AppStrings.changeAddress,
+                        textStyle: TextStyle(color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return Container(
+                        child: Row(
+                      children: [
+                        Expanded(
+                          child: Image.asset(
+                            dashboardProvider.cartItemsList[0].imageUrl ?? "",
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(AppAssets.warningblue);
+                            },
+                          ),
+                        ),
+                        Expanded(child: ItemCounter()),
+                        Expanded(
+                          child: TextWidget(
+                            msg: "\$90",
+                          ),
+                        )
+                      ],
+                    ));
                   },
                 ),
-              ),
-              Divider(),
-              // Final Price Display
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Total Price:',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '\$${dashboardProvider.count.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle checkout or payment process
-                },
-                child: Text('Checkout'),
-                style: ElevatedButton.styleFrom(
+
+                Divider(),
+                // Final Price Display
+                Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  minimumSize: Size(double.infinity, 50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Total Price:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '\$2', // Calculate total price
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    // Handle checkout or payment process
+                  },
+                  child: Text('Checkout'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    minimumSize: Size(double.infinity, 50),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -306,6 +299,7 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
 
   @override
   Widget build(BuildContext context) {
+    final dashboardProvider = Provider.of<DashboardViewModel>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -376,8 +370,10 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
                 itemBuilder: (context, menuIndex) {
                   return GestureDetector(
                     onTap: () {
-                      showFoodItemDetails(widget.menuList![menuIndex],
-                          widget.menuList?[menuIndex].nutritionalInfo);
+                      showFoodItemDetails(
+                          widget.menuList![menuIndex],
+                          widget.menuList?[menuIndex].nutritionalInfo,
+                          dashboardProvider);
                     },
                     child: IndividualFoodItem(
                       imageUrls: widget.menuList,
