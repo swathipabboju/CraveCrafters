@@ -8,10 +8,11 @@ import 'package:sample_app/viewModel/dashboard_view_model.dart';
 
 class ItemCounter extends StatefulWidget {
   final Menu? selectedItem;
+  final Function()? ontap;
 
   const ItemCounter({
     Key? key,
-    this.selectedItem,
+    this.selectedItem, this.ontap,
   }) : super(key: key);
 
   @override
@@ -19,120 +20,8 @@ class ItemCounter extends StatefulWidget {
 }
 
 class _ItemCounterState extends State<ItemCounter> {
-  void showCartPageDetails(DashboardViewModel dashboardProvider) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: dashboardProvider.cartItemsList?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    final item = dashboardProvider.cartItemsList?[index];
-                    return Card(
-                      elevation: 4,
-                      margin: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Item Image
-                            Image.network(
-                              item?.imageUrl.toString() ?? "",
-                              width: 80,
-                              height: 80,
-                              fit: BoxFit.cover,
-                            ),
-                            // Item Details
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      item?.name.toString() ?? "",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      '\$${item?.price?.toStringAsFixed(2)}',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            // Item Counter and Total Price per Item
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                ItemCounter(),
-                                const SizedBox(height: 8),
-                                Text(
-                                  'Total: \$${(item?.price?.toInt() ?? 0) * (item?.price?.toInt() ?? 0)}',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Divider(),
-              // Final Price Display
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Total Price:',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '\$${dashboardProvider.count.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle checkout or payment process
-                },
-                child: Text('Checkout'),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  minimumSize: Size(double.infinity, 50),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // Show Cart Details in a Modal BottomSheet
+  
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +29,6 @@ class _ItemCounterState extends State<ItemCounter> {
 
     // Set a fixed height for the cards
     double cardHeight = MediaQuery.of(context).size.height * 0.08;
-    // double cardwidthe = MediaQuery.of(context).size.width * 0.05;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -166,8 +54,7 @@ class _ItemCounterState extends State<ItemCounter> {
                       color: AppColors.black,
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0), // Adjust padding
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
                         '${dashboardProvider.count}', // Display current count
                         style: TextStyle(
@@ -194,58 +81,17 @@ class _ItemCounterState extends State<ItemCounter> {
 
           // Add to Cart Card
           GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: GestureDetector(
-                    onTap: () {
-                      if (mounted) {
-                        // Check if the widget is still mounted
-                        showCartPageDetails(dashboardProvider);
-                      }
-                    },
-                    child: Card(
-                      color: AppColors.black,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Cart',
-                            style: TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
-                          Text(
-                            "24 min. \$90",
-                            style: TextStyle(
-                                color: AppColors.white,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 20),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  duration: Duration(seconds: 2),
-                  backgroundColor: AppColors.black,
-                ),
-              );
-            },
+            onTap: widget.ontap,
             child: SizedBox(
               height: cardHeight,
               child: Card(
                 color: AppColors.black,
                 child: Row(
-                  mainAxisSize:
-                      MainAxisSize.min, // Use min size to avoid overflow
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Flexible widget to allow text to adapt
                     Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0), // Padding inside the card
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: TextWidget(
                           msg: "Add to cart",
                           textStyle: TextStyle(
@@ -255,13 +101,11 @@ class _ItemCounterState extends State<ItemCounter> {
                         ),
                       ),
                     ),
-                    // Price text
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0), // Padding for the price
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextWidget(
                         msg:
-                            "\$${(widget.selectedItem?.price ?? 0).toInt() * (dashboardProvider.count)}",
+                            "\$${(widget.selectedItem?.price ?? 0).toInt() * dashboardProvider.count}",
                         textStyle: TextStyle(
                             color: AppColors.white,
                             fontSize: 20,

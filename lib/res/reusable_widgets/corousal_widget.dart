@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
 import 'package:sample_app/model/food_category_details.dart';
 import 'package:sample_app/model/food_items_details.dart';
 import 'package:sample_app/res/constants/color_constants.dart';
@@ -10,6 +11,7 @@ import 'package:sample_app/res/app_assets/assetpath.dart';
 import 'package:sample_app/res/reusable_widgets/item_counter.dart';
 import 'package:sample_app/res/reusable_widgets/nutritions_info_card.dart';
 import 'package:sample_app/res/reusable_widgets/tab_barr_view.dart';
+import 'package:sample_app/viewModel/dashboard_view_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HorizontalImageCarousel extends StatefulWidget {
@@ -106,6 +108,10 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
                             height: 100, // Set a fixed height for ItemCounter
                             child: ItemCounter(
                               selectedItem: menuItem,
+                              ontap: () {
+                                Navigator.pop(context);
+                                showCustomToast(context);
+                              },
                             ),
                           ),
                         ],
@@ -115,6 +121,183 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
                 ),
               );
             },
+          ),
+        );
+      },
+    );
+  }
+
+  void showCustomToast(BuildContext context) {
+    // Get the overlay state from the context
+    final overlay = Overlay.of(context);
+
+    // Define an entry for the overlay
+    OverlayEntry overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        bottom: 50, // Adjust the position as per your requirement
+        left: 20, // Adjust the horizontal position
+        right: 20,
+        child: Material(
+          color: Colors.transparent,
+          child: GestureDetector(
+            onTap: () {
+              showCartPageDetails();
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+              decoration: BoxDecoration(
+                color: Colors.black, // Customize the background color
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Toast message
+                  Text(
+                    'Cart',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    "24 min. \$90",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    // Insert the overlay entry into the overlay
+    overlay?.insert(overlayEntry);
+
+    // Remove the toast after a delay
+    Future.delayed(Duration(seconds: 3), () {
+      overlayEntry.remove();
+    });
+  }
+
+  void showCartPageDetails() {
+    final dashboardProvider = Provider.of<DashboardViewModel>(context,listen: false);
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Allow scrolling
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: dashboardProvider.cartItemsList?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    final item = dashboardProvider.cartItemsList?[index];
+                    return Card(
+                      elevation: 4,
+                      margin: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Item Image
+                            Image.network(
+                              item?.imageUrl.toString() ?? "",
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            ),
+                            // Item Details
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item?.name.toString() ?? "",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      '\$${item?.price?.toStringAsFixed(2)}',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // Item Counter and Total Price per Item
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                ItemCounter(),
+                                const SizedBox(height: 8),
+                                Text(
+                                  'Total: \$${(item?.price?.toInt() ?? 0) * (item?.price?.toInt() ?? 0)}',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Divider(),
+              // Final Price Display
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Total Price:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '\$${dashboardProvider.count.toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Handle checkout or payment process
+                },
+                child: Text('Checkout'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  minimumSize: Size(double.infinity, 50),
+                ),
+              ),
+            ],
           ),
         );
       },
