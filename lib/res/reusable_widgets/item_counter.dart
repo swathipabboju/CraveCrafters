@@ -6,7 +6,7 @@ import 'package:sample_app/res/reusable_widgets/text_widget.dart';
 import 'package:sample_app/viewModel/dashboard_view_model.dart';
 
 class ItemCounter extends StatefulWidget {
-  final Menu? selectedItem;
+  final Items? selectedItem;
   final Function()? ontap;
 
   const ItemCounter({
@@ -40,10 +40,11 @@ class _ItemCounterState extends State<ItemCounter> {
                 child: Card(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    mainAxisSize: MainAxisSize.min, // Use min size to avoid overflow
+                    mainAxisSize:
+                        MainAxisSize.min, // Use min size to avoid overflow
                     children: [
                       IconButton(
-                        onPressed: dashboardProvider.onRemoveItem,
+                        onPressed: dashboardProvider.onRemoveItem(widget.selectedItem?.price),
                         icon: const Icon(
                           Icons.remove,
                           size: 30,
@@ -64,7 +65,7 @@ class _ItemCounterState extends State<ItemCounter> {
                         ),
                       ),
                       IconButton(
-                        onPressed: dashboardProvider.onAddItem,
+                        onPressed: dashboardProvider.onAddItem(widget.selectedItem?.price),
                         icon: const Icon(
                           Icons.add,
                           size: 30,
@@ -76,9 +77,9 @@ class _ItemCounterState extends State<ItemCounter> {
                 ),
               ),
             ),
-        
+
             const SizedBox(width: 8.0), // Space between the cards
-        
+
             // Add to Cart Card
             Expanded(
               child: GestureDetector(
@@ -92,7 +93,8 @@ class _ItemCounterState extends State<ItemCounter> {
                       children: [
                         Flexible(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
                             child: TextWidget(
                               msg: "Add to cart",
                               textStyle: TextStyle(
@@ -104,11 +106,10 @@ class _ItemCounterState extends State<ItemCounter> {
                           ),
                         ),
                         Flexible(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: FittedBox(
                             child: TextWidget(
-                              msg:
-                                  "\$${(widget.selectedItem?.price ?? 0).toInt() * dashboardProvider.count}",
+                              // msg: "\$${(widget.selectedItem?.price ?? 0).toInt() * dashboardProvider.count}",
+                              msg: "\$${dashboardProvider.individulaPrice}",
                               textStyle: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 20,
@@ -117,6 +118,23 @@ class _ItemCounterState extends State<ItemCounter> {
                             ),
                           ),
                         ),
+
+                        /*  Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: TextWidget(
+                                                          msg: "\$${dashboardProvider.individulaPrice}",
+
+                              textStyle: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ), */
                       ],
                     ),
                   ),

@@ -1,42 +1,26 @@
-class FoodCategoryDeatils {
-  List<FoodCategories>? foodCategories;
 
-  FoodCategoryDeatils({this.foodCategories});
 
-  FoodCategoryDeatils.fromJson(Map<String, dynamic> json) {
-    if (json['foodCategories'] != null) {
-      foodCategories = <FoodCategories>[];
-      json['foodCategories'].forEach((v) {
-        foodCategories!.add(new FoodCategories.fromJson(v));
-      });
-    }
+import 'package:sample_app/model/food_items_details.dart';
+
+class AddedCartItemDetails {
+  int? count;
+  Items? cartItem;
+
+  AddedCartItemDetails({this.count, this.cartItem});
+
+  AddedCartItemDetails.fromJson(Map<String, dynamic> json) {
+    count = json['count'];
+    cartItem =
+        json['cartItem'] != null ? new Items.fromJson(json['cartItem']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.foodCategories != null) {
-      data['foodCategories'] =
-          this.foodCategories!.map((v) => v.toJson()).toList();
+    data['count'] = this.count;
+    if (this.cartItem != null) {
+      data['cartItem'] = this.cartItem!.toJson();
     }
     return data;
   }
 }
 
-class FoodCategories {
-  String? id;
-  String? name;
-
-  FoodCategories({this.id, this.name});
-
-  FoodCategories.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
-}

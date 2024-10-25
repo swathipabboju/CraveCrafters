@@ -5,27 +5,25 @@ import 'package:sample_app/res/constants/color_constants.dart';
 import 'package:sample_app/res/constants/text_styles.dart';
 import 'package:sample_app/res/reusable_widgets/text_widget.dart';
 
-class IndividualFoodItem extends StatefulWidget {
-  final List<Menu>? imageUrls;
-  final int index;
-  const IndividualFoodItem({super.key, this.imageUrls, required this.index});
-  @override
-  State<IndividualFoodItem> createState() => _IndividualFoodItemState();
-}
+class IndividualFoodItem extends StatelessWidget {
+  final Items? items;
 
-class _IndividualFoodItemState extends State<IndividualFoodItem> {
+  const IndividualFoodItem({
+    super.key,
+    this.items,
+  });
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 10,
+    return Container(
+      // elevation: 10,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Expanded(
                 child: Image.network(
-              widget.imageUrls?[widget.index].imageUrl ?? "",
+              items?.imageUrl ?? "",
               errorBuilder: (context, error, stackTrace) {
                 return Image.asset(AppAssets
                     .AppIcon); // Local placeholder if the image fails to load
@@ -39,7 +37,7 @@ class _IndividualFoodItemState extends State<IndividualFoodItem> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextWidget(
-                      msg: widget.imageUrls?[widget.index].name,
+                      msg: items?.name,
                       align: TextAlign.center,
                       textStyle: TextStyles.regular,
                     ),
@@ -53,11 +51,11 @@ class _IndividualFoodItemState extends State<IndividualFoodItem> {
                             textStyle: WidgetStateProperty.all(
                                 TextStyle(color: AppColors.black))),
                         child: TextWidget(
-                          msg: "\$${widget.imageUrls?[widget.index].price}",
+                          msg: "\$${items?.price}",
                         ),
                       ),
                       TextWidget(
-                        msg: "327kCal",
+                        msg: "${items?.nutritionalInfo?[0].value} ${items?.nutritionalInfo?[0].nutritionName}",
                       ),
                     ],
                   )
