@@ -188,9 +188,14 @@ class DashboardViewModel with ChangeNotifier {
 
   List<PaymentPlatform>? paymentPlatforms;
   PaymentPlatform? selectedPlatform;
+  onSelectedPlatform(PaymentPlatform? newValue) {
+    selectedPlatform = newValue;
+    notifyListeners();
+  }
+
   Future<void> loadPaymentPlatformData() async {
     final String response =
-        await rootBundle.loadString('assets/payment_platforms.json');
+        await rootBundle.loadString('assets/payment_platform_json.json');
     final List<dynamic> data = json.decode(response);
 
     paymentPlatforms =
