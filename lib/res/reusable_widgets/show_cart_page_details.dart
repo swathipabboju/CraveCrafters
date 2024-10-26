@@ -4,6 +4,8 @@ import 'package:sample_app/res/app_assets/assetpath.dart';
 import 'package:sample_app/res/constants/color_constants.dart';
 import 'package:sample_app/res/constants/string_constants.dart';
 import 'package:sample_app/res/constants/text_styles.dart';
+import 'package:sample_app/res/reusable_widgets/pay_widget.dart';
+import 'package:sample_app/res/reusable_widgets/payment_platform_selector.dart';
 import 'package:sample_app/res/reusable_widgets/text_widget.dart';
 import 'package:sample_app/viewModel/dashboard_view_model.dart';
 
@@ -45,7 +47,82 @@ class CartDetailWidget extends StatelessWidget {
                 },
               ),
             ),
-            const Divider(),
+            Expanded(
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.local_drink_outlined),
+                      ),
+                      TextWidget(
+                        msg: "Cluttery",
+                      ),
+                      Card(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.remove, size: 30),
+                              color: AppColors.black,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                '${dashboardProvider.count}',
+                                style: const TextStyle(
+                                  color: AppColors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(Icons.add, size: 30),
+                              color: AppColors.black,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Card(
+                //decoration: BoxDecoration(border: Border.all()),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Delivery",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text("Free delivery from \$30")
+                        ],
+                      ),
+                      Text(
+                        "\$0.00",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: Row(
@@ -70,7 +147,21 @@ class CartDetailWidget extends StatelessWidget {
                 ],
               ),
             ),
-            ElevatedButton(
+            PaymentPlatformSelector(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: PayButton(
+                title: "Pay",
+                subtitle: "24 min. \$${dashboardProvider.individulaPrice}",
+                onPressed:
+                    () {
+                      Navigator.pop(context);
+                    }, // This can represent the number of items in the cart
+              ),
+            ),
+            /*  PayButton.show(
+          context, 'Cart', '24 min. \$${dashboardProvider.individulaPrice}'); */
+            /* ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -79,7 +170,7 @@ class CartDetailWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 minimumSize: const Size(double.infinity, 50),
               ),
-            ),
+            ), */
           ],
         ),
       ),
@@ -94,8 +185,7 @@ class CartItemRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dashboardProvider =
-        Provider.of<DashboardViewModel>(context, listen: false);
+    final dashboardProvider = Provider.of<DashboardViewModel>(context);
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -162,8 +252,7 @@ class CartItemRow extends StatelessWidget {
           Expanded(
             flex: 1,
             child: TextWidget(
-              msg:
-                  "\$${"9"/* dashboardProvider.individulaPrice */}",
+              msg: "\$${dashboardProvider.individulaPrice}",
             ),
           ),
         ],

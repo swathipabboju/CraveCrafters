@@ -6,9 +6,17 @@ import 'package:provider/provider.dart';
 import 'package:sample_app/model/food_category_details.dart';
 
 import 'package:sample_app/model/food_items_details.dart';
+import 'package:sample_app/model/payment_platform_model.dart';
 import 'package:sample_app/res/reusable_widgets/custom_toast.dart';
 
 class DashboardViewModel with ChangeNotifier {
+  bool isLoaderVisible = false;
+  bool get getLoaderVisibilityStatus => isLoaderVisible;
+  setLoaderVisibleStatus(bool status) {
+    isLoaderVisible = status;
+    notifyListeners();
+  }
+
   FoodItemsDetails? foodItemsDeatils;
   // List<Items>? menuDeatilsList;
   List<Categories>? totalCategoryList;
@@ -24,10 +32,19 @@ class DashboardViewModel with ChangeNotifier {
   onAddItem(double? price) {
     count++;
     individulaPrice = (price ?? 0) * count;
+    debugPrint("individulaPrice ${individulaPrice}");
     notifyListeners();
   }
 
-  int cartItemCount = 1;
+  onRemoveItem(double? price) {
+    if (count > 0) {
+      count--;
+    } else {
+      count = 0;
+    }
+    individulaPrice = (price ?? 0) * count;
+    notifyListeners();
+  }
 
   void onIncrementOfCartItem(Items? menuItem) {
     if (menuItem == null) {
@@ -43,6 +60,7 @@ class DashboardViewModel with ChangeNotifier {
       existingCartItem.count = (existingCartItem.count ?? 0) + 1;
 
       individulaPrice = ((menuItem.price ?? 0) * (existingCartItem.count ?? 0));
+      debugPrint("");
 
       debugPrint("categorywise list  ${categoryWiseList?[0].price}");
       debugPrint("Incremented item count: ${existingCartItem.count}");
@@ -98,6 +116,7 @@ class DashboardViewModel with ChangeNotifier {
           (existingCartItem.cartItem != null &&
               ((existingCartItem.count ?? 0) > 0))) {
         existingCartItem.count = (existingCartItem.count ?? 0) + count;
+
         notifyListeners();
       } else {
         if (count > 0) {
@@ -113,16 +132,6 @@ class DashboardViewModel with ChangeNotifier {
     } else {
       CustomToast.show(context, 'Add atleast one item to go to cart', '');
     }
-    notifyListeners();
-  }
-
-  onRemoveItem(double? price) {
-    if (count > 0) {
-      count--;
-    } else {
-      count = 0;
-    }
-    individulaPrice = (price ?? 0) * count;
     notifyListeners();
   }
 
@@ -174,6 +183,21 @@ class DashboardViewModel with ChangeNotifier {
                 .toList() ??
             [])
         .cast<Items>(); */
+    notifyListeners();
+  }
+
+  List<PaymentPlatform>? paymentPlatforms;
+  PaymentPlatform? selectedPlatform;
+  Future<void> loadPaymentPlatformData() async {
+    final String response =
+        await rootBundle.loadString('assets/payment_platforms.json');
+    final List<dynamic> data = json.decode(response);
+
+    paymentPlatforms =
+        data.map((json) => PaymentPlatform.fromJson(json)).toList();
+    selectedPlatform = (paymentPlatforms ?? []).isNotEmpty
+        ? paymentPlatforms?.first
+        : null; // Set default
     notifyListeners();
   }
 }

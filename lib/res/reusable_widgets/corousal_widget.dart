@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_app/model/food_items_details.dart';
 import 'package:sample_app/res/constants/color_constants.dart';
 import 'package:sample_app/res/constants/string_constants.dart';
 import 'package:sample_app/res/constants/text_styles.dart';
 import 'package:sample_app/res/reusable_widgets/individual_food_item.dart';
 import 'package:sample_app/res/app_assets/assetpath.dart';
-import 'package:sample_app/res/reusable_widgets/item_counter.dart';
-import 'package:sample_app/res/reusable_widgets/nutritions_info_card.dart';
 import 'package:sample_app/res/reusable_widgets/category_type_widget.dart';
-import 'package:sample_app/res/reusable_widgets/show_cart_page_details.dart';
 import 'package:sample_app/res/reusable_widgets/show_food_item_details.dart';
 import 'package:sample_app/viewModel/dashboard_view_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

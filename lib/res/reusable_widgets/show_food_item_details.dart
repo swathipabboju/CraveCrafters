@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:sample_app/model/food_items_details.dart';
 import 'package:sample_app/res/app_assets/assetpath.dart';
 import 'package:sample_app/res/constants/text_styles.dart';
-import 'package:sample_app/res/reusable_widgets/custom_toast.dart';
 import 'package:sample_app/viewModel/dashboard_view_model.dart';
 
 import 'nutritions_info_card.dart'; // Adjust the import according to your project structure
@@ -96,7 +95,10 @@ class FoodItemDetailsBottomSheet extends StatelessWidget {
                           ontap: () {
                             dashboardProvider.onAddToCart(menuItem, context);
                             dashboardProvider.resetCount();
+
                           },
+                          dashboardProvider: dashboardProvider,
+                          
                         ),
                       ),
                     ],

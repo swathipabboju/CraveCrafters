@@ -1,0 +1,27 @@
+[
+    {
+        "id": "1",
+        "name": "PhonePe",
+        "icon": "https://example.com/icons/phonepe.png"
+    },
+    {
+        "id": "2",
+        "name": "Google Pay",
+        "icon": "https://example.com/icons/googlepay.png"
+    },
+    {
+        "id": "3",
+        "name": "Paytm",
+        "icon": "https://example.com/icons/paytm.png"
+    },
+    {
+        "id": "4",
+        "name": "Amazon Pay",
+        "icon": "https://example.com/icons/amazonpay.png"
+    },
+    {
+        "id": "5",
+        "name": "PhonePay",
+        "icon": "https://example.com/icons/phonepay.png"
+    }
+]

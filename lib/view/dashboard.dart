@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_app/res/app_assets/assetpath.dart';
 import 'package:sample_app/res/constants/color_constants.dart';
 import 'package:sample_app/res/constants/string_constants.dart';
-import 'package:sample_app/res/constants/text_styles.dart';
 import 'package:sample_app/res/reusable_widgets/corousal_widget.dart';
 import 'package:sample_app/res/reusable_widgets/custom_appbar.dart';
 import 'package:sample_app/res/reusable_widgets/show_cart_page_details.dart';
-import 'package:sample_app/res/reusable_widgets/text_widget.dart';
 import 'package:sample_app/viewModel/dashboard_view_model.dart';
 
 class Dashboard extends StatefulWidget {
@@ -35,7 +32,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<DashboardViewModel>(context);
+ 
     return Scaffold(
       key: _scaffoldKey,
       appBar: CustomAppBar(

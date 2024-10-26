@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sample_app/model/food_items_details.dart';
 import 'package:sample_app/res/constants/color_constants.dart';
 import 'package:sample_app/res/reusable_widgets/text_widget.dart';
 import 'package:sample_app/viewModel/dashboard_view_model.dart';
 
-class ItemCounter extends StatefulWidget {
+class ItemCounter extends StatelessWidget {
   final Items? selectedItem;
   final Function()? ontap;
+  final DashboardViewModel? dashboardProvider;
 
   const ItemCounter({
     Key? key,
     this.selectedItem,
     this.ontap,
+    this.dashboardProvider,
   }) : super(key: key);
 
   @override
-  _ItemCounterState createState() => _ItemCounterState();
-}
-
-class _ItemCounterState extends State<ItemCounter> {
-  @override
   Widget build(BuildContext context) {
-    final dashboardProvider = Provider.of<DashboardViewModel>(context);
-
     // Set a fixed height for the cards
     double cardHeight = MediaQuery.of(context).size.height * 0.08;
 
@@ -44,7 +38,14 @@ class _ItemCounterState extends State<ItemCounter> {
                         MainAxisSize.min, // Use min size to avoid overflow
                     children: [
                       IconButton(
-                        onPressed: dashboardProvider.onRemoveItem(widget.selectedItem?.price),
+                        onPressed: () {
+                          WidgetsBinding.instance.addPostFrameCallback(
+                            (timeStamp) {
+                              dashboardProvider
+                                  ?.onRemoveItem(selectedItem?.price);
+                            },
+                          );
+                        },
                         icon: const Icon(
                           Icons.remove,
                           size: 30,
@@ -55,7 +56,7 @@ class _ItemCounterState extends State<ItemCounter> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(
-                            '${dashboardProvider.count}', // Display current count
+                            '${dashboardProvider?.count}', // Display current count
                             style: TextStyle(
                               color: AppColors.black,
                               fontSize: 20,
@@ -65,7 +66,13 @@ class _ItemCounterState extends State<ItemCounter> {
                         ),
                       ),
                       IconButton(
-                        onPressed: dashboardProvider.onAddItem(widget.selectedItem?.price),
+                        onPressed: () {
+                          WidgetsBinding.instance.addPostFrameCallback(
+                            (timeStamp) {
+                              dashboardProvider?.onAddItem(selectedItem?.price);
+                            },
+                          );
+                        },
                         icon: const Icon(
                           Icons.add,
                           size: 30,
@@ -83,7 +90,7 @@ class _ItemCounterState extends State<ItemCounter> {
             // Add to Cart Card
             Expanded(
               child: GestureDetector(
-                onTap: widget.ontap,
+                onTap: ontap,
                 child: SizedBox(
                   height: cardHeight,
                   child: Card(
@@ -109,7 +116,7 @@ class _ItemCounterState extends State<ItemCounter> {
                           child: FittedBox(
                             child: TextWidget(
                               // msg: "\$${(widget.selectedItem?.price ?? 0).toInt() * dashboardProvider.count}",
-                              msg: "\$${dashboardProvider.individulaPrice}",
+                              msg: "\$${dashboardProvider?.individulaPrice}",
                               textStyle: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 20,
