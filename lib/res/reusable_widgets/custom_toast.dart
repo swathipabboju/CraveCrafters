@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_app/res/constants/color_constants.dart';
 import 'package:sample_app/res/reusable_widgets/show_cart_page_details.dart';
 
 class CustomToast {
@@ -28,7 +29,7 @@ class CustomToast {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
               decoration: BoxDecoration(
-                color: Colors.black, // Customize the background color
+                color: AppColors.blackCode, // Customize the background color
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Row(

@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const Color appbarColour = Color.fromARGB(255, 223, 179, 59);
   static const Color primaryTransparent = Color(0x401D3654);
-  static const Color black = Colors.black;
+  // static const Color black = Colors.black;
   static const Color white = Colors.white;
   static const Color orange = Colors.orange;
-  static const Color lightBlue = Color(0xFF8AC6FC); // Added color #8ac6fc
-  static const Color lavender = Color(0xFFCDCDFC); // Added color #cdcdfc
-  static const Color softBlue = Color(0xFFB5C7F9);
-  static const Color buttonColor = Color(0xFFf1f1f1);
+  static const Color blackCode = Color(0x1F1F1F); // Added color #8ac6fc
+  
   
   static const MaterialColor appbarSwatch = MaterialColor(
     0xFF123456, // The main color

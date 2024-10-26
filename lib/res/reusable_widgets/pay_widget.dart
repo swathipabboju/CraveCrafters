@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_app/res/constants/color_constants.dart';
 
 class PayButton extends StatelessWidget {
   final String title;
@@ -19,7 +20,7 @@ class PayButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: AppColors.blackCode,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Row(

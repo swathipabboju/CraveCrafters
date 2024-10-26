@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:sample_app/model/food_category_details.dart';
+import 'package:sample_app/model/added_cart_item_details.dart';
 
 import 'package:sample_app/model/food_items_details.dart';
 import 'package:sample_app/model/payment_platform_model.dart';
+import 'package:sample_app/res/custom_alerts/order_confirmed_screen.dart';
 import 'package:sample_app/res/reusable_widgets/custom_toast.dart';
+import 'package:sample_app/res/routes/app_routes.dart';
 
 class DashboardViewModel with ChangeNotifier {
   bool isLoaderVisible = false;
@@ -23,20 +25,30 @@ class DashboardViewModel with ChangeNotifier {
   List<NutritionalInfo>? nutritionalInfoList;
   List<AddedCartItemDetails>? cartItemsList = [];
   List<Items>? categoryWiseList;
-  int? totalAmout;
+  int totalAmout = 0;
   late TabController tabController;
   int selectedCategoryIndex = 0; // Track selected tab index
-  double? individulaPrice;
+  int? individulaPrice;
 
   int count = 1;
-  onAddItem(double? price) {
+  onPay(BuildContext context) {
+    if ((cartItemsList?.isNotEmpty ?? false) && (totalAmout != 0)) {
+      Navigator.pushNamed(context, AppRoutes.orderConfirmed);
+      cartItemsList?.clear();
+    } else {
+      debugPrint("elseee8r983473");
+    }
+    notifyListeners();
+  }
+
+  onAddItem(int? price) {
     count++;
     individulaPrice = (price ?? 0) * count;
     debugPrint("individulaPrice ${individulaPrice}");
     notifyListeners();
   }
 
-  onRemoveItem(double? price) {
+  onRemoveItem(int? price) {
     if (count > 0) {
       count--;
     } else {
@@ -46,7 +58,23 @@ class DashboardViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void onIncrementOfCartItem(Items? menuItem) {
+  void calculateTotalAmount() {
+    if ((cartItemsList?.isNotEmpty ?? false) && cartItemsList != null) {
+      totalAmout = cartItemsList!.fold(0, (sum, item) {
+        // Using ?? operator to provide a default value if count or price is null
+        final itemCount = item.count ?? 0;
+        final itemPrice = item.cartItem?.price ?? 0.0;
+        return sum + (itemCount * itemPrice).toInt();
+      });
+      debugPrint("totalamt in if ${totalAmout}");
+    } else {
+      totalAmout = 0;
+      debugPrint("totalamt in if ${totalAmout}");
+    }
+    notifyListeners();
+  }
+
+  void onIncrementOfCartItem(Items? menuItem, int itemIndex) {
     if (menuItem == null) {
       debugPrint("Received null menuItem");
       return;
@@ -58,15 +86,10 @@ class DashboardViewModel with ChangeNotifier {
 
     if (existingCartItem != null) {
       existingCartItem.count = (existingCartItem.count ?? 0) + 1;
-
-      individulaPrice = ((menuItem.price ?? 0) * (existingCartItem.count ?? 0));
-      debugPrint("");
-
-      debugPrint("categorywise list  ${categoryWiseList?[0].price}");
-      debugPrint("Incremented item count: ${existingCartItem.count}");
     } else {
       debugPrint("Item not found in cart");
     }
+    calculateTotalAmount();
     notifyListeners();
   }
 
@@ -82,19 +105,20 @@ class DashboardViewModel with ChangeNotifier {
 
     if (existingCartItem != null && (existingCartItem.count ?? 0) >= 1) {
       existingCartItem.count = (existingCartItem.count ?? 0) - 1;
-      individulaPrice = ((menuItem.price ?? 0) * (existingCartItem.count ?? 0));
-      debugPrint("decremented item count: ${existingCartItem.count}");
+
       if (existingCartItem.count == 0) {
         cartItemsList?.removeAt(index);
       }
     } else {
       debugPrint("Item not found in cart");
     }
+    calculateTotalAmount();
     notifyListeners();
   }
 
-  resetCount() {
+  resetCount(Items? selectedItem) {
     count = 1;
+    individulaPrice = selectedItem?.price;
     notifyListeners();
   }
 
@@ -116,12 +140,12 @@ class DashboardViewModel with ChangeNotifier {
           (existingCartItem.cartItem != null &&
               ((existingCartItem.count ?? 0) > 0))) {
         existingCartItem.count = (existingCartItem.count ?? 0) + count;
-
         notifyListeners();
       } else {
         if (count > 0) {
           cartItemsList
               ?.add(AddedCartItemDetails(count: count, cartItem: menuItem));
+          notifyListeners();
         }
 
         notifyListeners();
@@ -132,10 +156,11 @@ class DashboardViewModel with ChangeNotifier {
     } else {
       CustomToast.show(context, 'Add atleast one item to go to cart', '');
     }
+    calculateTotalAmount();
     notifyListeners();
   }
 
-  void onRemoveFromCart(int index) {
+  /* void onRemoveFromCart(int index) {
     if (index < 0 || index >= (cartItemsList?.length ?? 0)) {
       debugPrint("Invalid index: $index");
       return;
@@ -154,7 +179,7 @@ class DashboardViewModel with ChangeNotifier {
 
     notifyListeners(); // Notify listeners about the change
   }
-
+ */
   getNutritionsInfo(Items menu) {
     nutritionalInfoList = menu.nutritionalInfo;
     notifyListeners(); // Return an empty list if the index is out of range or menuDeatilsList is null

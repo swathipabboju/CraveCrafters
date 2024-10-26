@@ -13,7 +13,7 @@ class InternetCheckAlert {
             AppStrings.appName,
             style: TextStyle(
               fontSize: 15,
-              color: AppColors.black,
+              color: AppColors.blackCode,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -21,12 +21,12 @@ class InternetCheckAlert {
             children: [
               Text(
                 "No Internet Connection",
-                style: TextStyle(fontSize: 13, color: AppColors.black),
+                style: TextStyle(fontSize: 13, color: AppColors.blackCode),
               ),
               SizedBox(height: 8.0),
               Text(
                 "Please check your internet connection and try again.",
-                style: TextStyle(fontSize: 12, color: AppColors.black),
+                style: TextStyle(fontSize: 12, color: AppColors.blackCode),
               ),
             ],
           ),
@@ -37,7 +37,7 @@ class InternetCheckAlert {
               },
               child: const Text(
                 AppStrings.ok,
-                style: TextStyle(color: AppColors.black),
+                style: TextStyle(color: AppColors.blackCode),
               ),
             ),
           ],

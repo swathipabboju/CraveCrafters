@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_app/res/constants/color_constants.dart';
 
 class DropdownReusable<T> extends StatefulWidget {
   final String? label;
@@ -56,9 +57,9 @@ class _DropdownReusableState<T> extends State<DropdownReusable<T>> {
             icon: const Icon(Icons.arrow_drop_down),
             iconSize: 24,
             elevation: 16,
-            iconEnabledColor: Colors.black,
+            iconEnabledColor: AppColors.blackCode,
             style: const TextStyle(
-              color: Colors.black,
+              color: AppColors.blackCode
             ),
             onChanged: widget.onChanged,
             items: widget.items,
@@ -73,84 +74,3 @@ class _DropdownReusableState<T> extends State<DropdownReusable<T>> {
 
 
 
-/* import 'package:flutter/material.dart';
-
-class DropdownTextFormField<T> extends StatelessWidget {
-  final String label;
-  final List<DropdownMenuItem<T>> items;
-  final void Function(T?)? onChanged;
-  final T value;
-  final FormFieldSetter<T>? onSaved;
-  final FormFieldValidator<T>? validator;
-  final bool isEnabled;
-
-  const DropdownTextFormField({
-    super.key,
-    required this.label,
-    required this.items,
-    required this.onChanged,
-    required this.value,
-    required this.isEnabled,
-    this.onSaved,
-    this.validator,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(
-          height: 60.0, // Adjust this height as needed
-          child: InputDecorator(
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white, // Change border color here
-                ),
-              ),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white, // Change border color here
-                ),
-              ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white, // Change border color here
-                ),
-              ),
-              /* filled: true,
-              fillColor: Colors.grey[200], */ // Change fill color here
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<T>(
-                hint: Text(label),
-                value: value,
-                items: items,
-                onChanged: isEnabled ? onChanged : null,
-                isDense: true,
-                isExpanded: true,
-                dropdownColor:
-                    Colors.white, // Change dropdown button color here
-                icon: const Icon(Icons.arrow_drop_down,
-                    color:
-                        Colors.black), // Change dropdown button icon color here
-                disabledHint: Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    value.toString(),
-                    style: const TextStyle(color: Colors.black,
-                    ),
-                  ),
-                ),
-                // menuMaxHeight: 250,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
- */

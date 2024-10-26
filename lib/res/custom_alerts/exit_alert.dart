@@ -36,7 +36,7 @@ class ExitAlert {
                   onPressed: () => Navigator.pop(context),
                   child: const Text(
                     'NO',
-                    style: TextStyle(color: Colors.teal),
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
                 TextButton(
@@ -49,7 +49,7 @@ class ExitAlert {
                   },
                   child: const Text(
                     'YES',
-                    style: TextStyle(color: Colors.teal),
+                    style: TextStyle(color: Colors.black),
                   ),
                 ),
               ],

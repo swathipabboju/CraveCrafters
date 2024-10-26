@@ -44,6 +44,7 @@ class _CustomHorizontalTabsState extends State<CategoryTypeWidget>
     final dashboardProvider = Provider.of<DashboardViewModel>(context);
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // TabBar Widget
         Container(
@@ -77,7 +78,7 @@ class _CustomHorizontalTabsState extends State<CategoryTypeWidget>
                       fontSize: 16,
                       color: dashboardProvider.selectedCategoryIndex == index
                           ? AppColors.orange // Text color for selected tab
-                          : AppColors.black, // Text color for unselected tab
+                          : AppColors.blackCode, // Text color for unselected tab
                     ),
                   ),
                 );

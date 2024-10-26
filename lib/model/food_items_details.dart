@@ -77,7 +77,7 @@ class Items {
   int? id;
   String? name;
   String? imageUrl;
-  double? price;
+  int? price;
   String? description;
   List<NutritionalInfo>? nutritionalInfo;
 

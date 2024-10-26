@@ -41,8 +41,8 @@ class ItemCounter extends StatelessWidget {
                         onPressed: () {
                           WidgetsBinding.instance.addPostFrameCallback(
                             (timeStamp) {
-                              dashboardProvider
-                                  ?.onRemoveItem(selectedItem?.price);
+                              dashboardProvider?.onRemoveItem(
+                                  selectedItem?.price, /* selectedItem */);
                             },
                           );
                         },
@@ -50,7 +50,7 @@ class ItemCounter extends StatelessWidget {
                           Icons.remove,
                           size: 30,
                         ),
-                        color: AppColors.black,
+                        color: AppColors.blackCode,
                       ),
                       Flexible(
                         child: Container(
@@ -58,7 +58,7 @@ class ItemCounter extends StatelessWidget {
                           child: Text(
                             '${dashboardProvider?.count}', // Display current count
                             style: TextStyle(
-                              color: AppColors.black,
+                              color: AppColors.blackCode,
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
@@ -69,7 +69,8 @@ class ItemCounter extends StatelessWidget {
                         onPressed: () {
                           WidgetsBinding.instance.addPostFrameCallback(
                             (timeStamp) {
-                              dashboardProvider?.onAddItem(selectedItem?.price);
+                              dashboardProvider?.onAddItem(
+                                  selectedItem?.price, /* selectedItem */);
                             },
                           );
                         },
@@ -77,7 +78,7 @@ class ItemCounter extends StatelessWidget {
                           Icons.add,
                           size: 30,
                         ),
-                        color: AppColors.black,
+                        color: AppColors.blackCode,
                       ),
                     ],
                   ),
@@ -94,9 +95,10 @@ class ItemCounter extends StatelessWidget {
                 child: SizedBox(
                   height: cardHeight,
                   child: Card(
-                    color: AppColors.black,
+                    color: AppColors.blackCode,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
                           child: Padding(
@@ -115,8 +117,8 @@ class ItemCounter extends StatelessWidget {
                         Flexible(
                           child: FittedBox(
                             child: TextWidget(
-                              // msg: "\$${(widget.selectedItem?.price ?? 0).toInt() * dashboardProvider.count}",
-                              msg: "\$${dashboardProvider?.individulaPrice}",
+                               msg: "\$${(selectedItem?.price ?? 0) * (dashboardProvider?.count ?? 0)}",
+                              // msg: "\$${dashboardProvider?.individulaPrice}",
                               textStyle: TextStyle(
                                 color: AppColors.white,
                                 fontSize: 20,
@@ -132,7 +134,7 @@ class ItemCounter extends StatelessWidget {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 8.0),
                             child: TextWidget(
-                                                          msg: "\$${dashboardProvider.individulaPrice}",
+                                                          msg: "\$${dashboardProvider.individulItemPrice}",
 
                               textStyle: TextStyle(
                                 color: AppColors.white,

@@ -22,7 +22,7 @@ class ValidationIoSAlert {
               const SizedBox(height: 8.0),
               Text(
                 "$description",
-                style: const TextStyle(fontSize: 12, color: AppColors.black),
+                style: const TextStyle(fontSize: 12, color: AppColors.blackCode),
               ),
             ],
           ),
@@ -33,7 +33,7 @@ class ValidationIoSAlert {
               },
               child: const Text(
                 AppStrings .ok,
-                style: TextStyle(color: AppColors.black),
+                style: TextStyle(color: AppColors.blackCode),
               ),
             ),
           ],

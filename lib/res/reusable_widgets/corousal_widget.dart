@@ -23,12 +23,6 @@ class HorizontalImageCarousel extends StatefulWidget {
 
 class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
   int currentIndex = 0; // Keep track of the current page index
-
-/* // Helper method to calculate total price
-double calculateTotalPrice(List<AddedCartItemDetails>? cartItemsList) {
-  return cartItemsList?.fold(0, (total, item) => total + (item.cartItem?.price ?? 0) * (item.count ?? 1)) ?? 0;
-} */
-
   @override
   Widget build(BuildContext context) {
     final dashboardProvider = Provider.of<DashboardViewModel>(context);
@@ -56,13 +50,16 @@ double calculateTotalPrice(List<AddedCartItemDetails>? cartItemsList) {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15.0),
                       child: Image.network(
+                        loadingBuilder: (context, child, loadingProgress) {
+                          return CircularProgressIndicator();
+                        },
                         width: double.infinity,
                         dashboardProvider.totalCategoryList?[index].items?.first
                                 .imageUrl ??
                             "",
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(AppAssets.AppIcon);
+                          return Image.asset(AppAssets.app_logo);
                         },
                       ),
                     ),
@@ -90,7 +87,7 @@ double calculateTotalPrice(List<AddedCartItemDetails>? cartItemsList) {
                 effect: ExpandingDotsEffect(
                   dotHeight: 10,
                   dotWidth: 10,
-                  activeDotColor: AppColors.black,
+                  activeDotColor: AppColors.blackCode,
                   dotColor: Colors.grey,
                 ),
               ),
@@ -119,7 +116,6 @@ double calculateTotalPrice(List<AddedCartItemDetails>? cartItemsList) {
                             );
                           },
                         );
-                        
                       },
                       child: IndividualFoodItem(
                         items:

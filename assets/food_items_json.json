@@ -10,7 +10,7 @@
             "id": 1,
             "name": "Margherita Pizza",
             "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
-            "price": 9.99,
+            "price": 9,
             "description": "Classic pizza with fresh tomatoes, mozzarella cheese, and basil.",
             "nutritional_info": [
               {
@@ -34,8 +34,8 @@
           {
             "id": 2,
             "name": "Pepperoni Pizza",
-            "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
-            "price": 11.50,
+            "image_url": "https://againstthegraingourmet.com/cdn/shop/products/Pepperoni_Pizza_Beauty_1200x1200.jpg?v=1658703726",
+            "price": 11,
             "description": "Pizza with pepperoni, mozzarella cheese, and tomato sauce.",
             "nutritional_info": [
               {
@@ -66,7 +66,7 @@
             "id": 3,
             "name": "Chicken Biryani",
             "image_url": "https://c.ndtvimg.com/2023-03/7n07er7o_biryani_625x300_09_March_23.jpg",
-            "price": 13.99,
+            "price": 13,
             "description": "Aromatic basmati rice with marinated chicken, cooked with spices.",
             "nutritional_info": [
               {
@@ -90,8 +90,8 @@
           {
             "id": 4,
             "name": "Vegetable Biryani",
-            "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
-            "price": 10.99,
+            "image_url": "https://www.authenticroyal.com/wp-content/uploads/2016/11/vegetable-biryani.jpg",
+            "price": 10,
             "description": "Basmati rice cooked with a mix of fresh vegetables and spices.",
             "nutritional_info": [
               {
@@ -122,7 +122,7 @@
             "id": 5,
             "name": "Chocolate Lava Cake",
             "image_url": "https://floursandfrostings.com/wp-content/uploads/2017/01/IMG_20170104_003650_972-1.jpg",
-            "price": 6.50,
+            "price": 6,
             "description": "Rich chocolate cake with a molten center, served with vanilla ice cream.",
             "nutritional_info": [
               {
@@ -146,8 +146,8 @@
           {
             "id": 6,
             "name": "Tiramisu",
-            "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
-            "price": 7.99,
+            "image_url": "https://bakingamoment.com/wp-content/uploads/2023/10/IMG_3431-tiramisu-cake.jpg",
+            "price": 7,
             "description": "Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone.",
             "nutritional_info": [
               {
@@ -177,8 +177,8 @@
           {
             "id": 7,
             "name": "Mango Smoothie",
-            "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
-            "price": 5.50,
+            "image_url": "https://bakewithsweetspot.com/wp-content/uploads/2023/06/mango-protein-smoothie-copy.jpeg",
+            "price": 5,
             "description": "Creamy smoothie made with fresh mangoes, yogurt, and a hint of honey.",
             "nutritional_info": [
               {
@@ -202,8 +202,8 @@
           {
             "id": 8,
             "name": "Iced Latte",
-            "image_url": "https://www.indianhealthyrecipes.com/wp-content/uploads/2015/10/pizza-recipe-1.jpg",
-            "price": 4.50,
+            "image_url": "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/iced-latte-30188f7.jpg",
+            "price": 4,
             "description": "Chilled coffee with milk and ice, perfect for a refreshing break.",
             "nutritional_info": [
               {

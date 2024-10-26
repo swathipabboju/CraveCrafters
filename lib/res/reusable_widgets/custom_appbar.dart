@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
       actions: [
         IconButton(
-          icon: Icon(Icons.shopping_bag), // Home icon
+          icon: Icon(Icons.shopping_cart_outlined), // Home icon
           onPressed: onHomeTap,
         ),
       ],

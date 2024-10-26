@@ -23,7 +23,7 @@ class NutritionsInfoCard extends StatelessWidget {
                   item.value.toString(),
                   style: TextStyle(
                     fontSize: 18,
-                    color: AppColors.black,
+                    color: AppColors.blackCode,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -32,7 +32,7 @@ class NutritionsInfoCard extends StatelessWidget {
                    item.nutritionName.toString(),
                   style: TextStyle(
                     fontSize: 16,
-                       color: AppColors.black
+                       color: AppColors.blackCode
                     
                   ),
                 ),

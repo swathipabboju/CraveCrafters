@@ -18,10 +18,5 @@
         "id": "4",
         "name": "Amazon Pay",
         "icon": "https://example.com/icons/amazonpay.png"
-    },
-    {
-        "id": "5",
-        "name": "PhonePay",
-        "icon": "https://example.com/icons/phonepay.png"
     }
 ]

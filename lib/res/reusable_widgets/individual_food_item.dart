@@ -26,7 +26,7 @@ class IndividualFoodItem extends StatelessWidget {
               items?.imageUrl ?? "",
               errorBuilder: (context, error, stackTrace) {
                 return Image.asset(AppAssets
-                    .AppIcon); // Local placeholder if the image fails to load
+                    .app_logo); // Local placeholder if the image fails to load
               },
             )),
             Expanded(
@@ -49,7 +49,7 @@ class IndividualFoodItem extends StatelessWidget {
                         onPressed: () {},
                         style: ButtonStyle(
                             textStyle: WidgetStateProperty.all(
-                                TextStyle(color: AppColors.black))),
+                                TextStyle(color: AppColors.blackCode))),
                         child: TextWidget(
                           msg: "\$${items?.price}",
                         ),
