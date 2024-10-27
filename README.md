@@ -1,19 +1,19 @@
 # CraveCrafters
 
-# Food Delivery App UI Implementation
+## Food Delivery App UI Implementation
 
-This repository contains my implementation of a Food Delivery App UI in Flutter, inspired by the design on Dribbble. The primary goal of this project is to recreate the given UI as closely as possible and demonstrate skills in Flutter development.
+This repository contains my implementation of a Food Delivery App named CraveCrafters UI in Flutter, inspired by the design on Dribbble. The primary goal of this project is to recreate the given UI as closely as possible and demonstrate skills in Flutter development.
 
 ## Problem Statement
 
- The app includes the following features:
+The app includes the following features:
 
 - Home screen with a horizontal list of food categories.
 - List of food items.
 - Food item details displayed in a bottom sheet.
 - Cart screen to view items added to the cart.
-  
-All states are managed locally without external API integration. 
+
+All states are managed locally without external API integration.
 
 ## Features
 
@@ -21,13 +21,14 @@ All states are managed locally without external API integration.
 - **Food Details Bottom Sheet**: Opens when a food item is clicked, displaying details like name, price, and a button to add to the cart.
 - **Cart Screen**: Shows items added to the cart, allows removal of items, and displays the total price.
 - **State Management**: State is managed locally, with items and cart updates handled without an API.
-- **Third-Party Libraries**: used Flutter package like `Provider`, animation libraries.
+- **Third-Party Libraries**: Uses Flutter packages like `Provider` and animation libraries.
 
 ## Getting Started
 
 ### Prerequisites
 
 Ensure you have the following installed:
+
 - [Flutter SDK](https://flutter.dev/docs/get-started/install)
 - [Dart SDK](https://dart.dev/get-dart)
 - Android Studio, Xcode, or any preferred IDE with Flutter plugin.
@@ -35,8 +36,7 @@ Ensure you have the following installed:
 ### Running the Project
 
 1. **Clone the Repository**
+
    ```bash
-   git clone https://github.com/your-username/food-delivery-app-ui.git
-
-
-
+   git clone https://github.com/swathipabboju/CraveCrafters.git
+   cd CraveCrafters
