@@ -34,7 +34,7 @@
           {
             "id": 2,
             "name": "Pepperoni Pizza",
-            "image_url": "https://againstthegraingourmet.com/cdn/shop/products/Pepperoni_Pizza_Beauty_1200x1200.jpg?v=1658703726",
+            "image_url": "https://images.ctfassets.net/ttw7uwgviuml/3tlrBPPky3SNq7sxDowxOc/73958ae22c00682deb72f4ce5a68fde8/PLU_WF_LIFESTYLE_Pepperoni_Pizza_READYMEALS.jpg?fm=jpg&fl=progressive&w=650&h=650",
             "price": 11,
             "description": "Pizza with pepperoni, mozzarella cheese, and tomato sauce.",
             "nutritional_info": [
@@ -146,7 +146,7 @@
           {
             "id": 6,
             "name": "Tiramisu",
-            "image_url": "https://bakingamoment.com/wp-content/uploads/2023/10/IMG_3431-tiramisu-cake.jpg",
+            "image_url": "https://loperaindia.com/wp-content/uploads/2024/08/Tiramisu.jpg",
             "price": 7,
             "description": "Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone.",
             "nutritional_info": [

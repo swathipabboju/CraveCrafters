@@ -26,7 +26,7 @@ class IndividualFoodItem extends StatelessWidget {
               items?.imageUrl ?? "",
               errorBuilder: (context, error, stackTrace) {
                 return Image.asset(AppAssets
-                    .app_logo); // Local placeholder if the image fails to load
+                    .app_launcher); // Local placeholder if the image fails to load
               },
             )),
             Expanded(

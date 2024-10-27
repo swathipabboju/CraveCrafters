@@ -29,21 +29,19 @@ class _PaymentPlatformSelectorState extends State<PaymentPlatformSelector> {
 
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.payment, size: 30), // Payment icon
-                SizedBox(width: 10),
-                // Display selected platform name
-                Text(
-                  provider.selectedPlatform?.name ?? "Select Payment Platform",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ],
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Icon(Icons.payment, size: 30), // Payment icon
+              SizedBox(width: 10),
+              // Display selected platform name
+              Text(
+                provider.selectedPlatform?.name ?? "Select Payment Platform",
+                style: TextStyle(fontSize: 18),
+              ),
+            ],
+          ),
         ),
         // Build the dropdown widget
 

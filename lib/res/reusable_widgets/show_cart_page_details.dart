@@ -19,7 +19,6 @@ class CartDetailWidget extends StatefulWidget {
 class _CartDetailWidgetState extends State<CartDetailWidget> {
   @override
   void initState() {
-
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
@@ -34,121 +33,144 @@ class _CartDetailWidgetState extends State<CartDetailWidget> {
   Widget build(BuildContext context) {
     final dashboardProvider = Provider.of<DashboardViewModel>(context);
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Card(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextWidget(
-                msg: AppStrings.cartMsg,
-                textStyle: TextStyles.header,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextWidget(msg: AppStrings.address),
-                    TextWidget(
-                      msg: AppStrings.changeAddress,
-                      textStyle: const TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ),
-              (dashboardProvider.cartItemsList ?? []).isNotEmpty
-                  ? ListView.builder(
-                      itemCount: dashboardProvider.cartItemsList?.length ?? 0,
-                      shrinkWrap:
-                          true, // Ensures ListView takes up only the needed space
-                      physics:
-                          NeverScrollableScrollPhysics(), // Disables scrolling for ListView
-                      itemBuilder: (context, itemIndex) {
-                        return CartItemRow(itemIndex: itemIndex);
-                      },
-                    )
-                  : Card(
-                      elevation: 6.0,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          children: [
-                            // Empty cart icon or image
-                            Icon(
-                              Icons.shopping_cart_outlined,
-                              size: 120,
-                              color: Colors.grey.shade400,
-                            ),
-                            SizedBox(height: 24), // Spacing
-
-                            // Title text
-                            Text(
-                              "Your Cart is Empty",
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey.shade700,
-                              ),
-                            ),
-                            SizedBox(height: 12), // Spacing
-
-                            // Subtitle text
-                            Text(
-                              "Looks like you haven't added anything to your cart yet!",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.grey.shade600,
-                              ),
-                            ),
-                            SizedBox(height: 32),
-                          ],
-                        ),
-                      ),
-                    ),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Delivery",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text("Free delivery from \$30")
-                        ],
-                      ),
-                      Text(
-                        "\$${dashboardProvider.totalAmout}",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              PaymentPlatformSelector(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: PayButton(
-                  title: "Pay",
-                  subtitle: "24 min. \$${dashboardProvider.count}",
-                  onPressed: () {
-                    dashboardProvider.onPay(context);
-                    // Navigator.pop(context);
-                  },
-                ),
-              ),
-            ],
+    return Stack(
+      children: [
+        Positioned(
+          top: 8,
+          right: 8,
+          child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+             
+            },
+            icon: Icon(
+              Icons.cancel,
+              color: Colors.grey,
+              size: 30,
+            ),
           ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Card(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextWidget(
+                      msg: AppStrings.cartMsg,
+                      textStyle: TextStyles.header,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextWidget(msg: AppStrings.address),
+                        TextWidget(
+                          msg: AppStrings.changeAddress,
+                          textStyle: const TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ),
+                  (dashboardProvider.cartItemsList ?? []).isNotEmpty
+                      ? ListView.builder(
+                          itemCount:
+                              dashboardProvider.cartItemsList?.length ?? 0,
+                          shrinkWrap:
+                              true, // Ensures ListView takes up only the needed space
+                          physics:
+                              NeverScrollableScrollPhysics(), // Disables scrolling for ListView
+                          itemBuilder: (context, itemIndex) {
+                            return CartItemRow(itemIndex: itemIndex);
+                          },
+                        )
+                      : Card(
+                          elevation: 6.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                // Empty cart icon or image
+                                Icon(
+                                  Icons.shopping_cart_outlined,
+                                  size: 120,
+                                  color: Colors.grey.shade400,
+                                ),
+                                SizedBox(height: 24), // Spacing
+
+                                // Title text
+                                Text(
+                                  "Your Cart is Empty",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey.shade700,
+                                  ),
+                                ),
+                                SizedBox(height: 12), // Spacing
+
+                                // Subtitle text
+                                Text(
+                                  "Looks like you haven't added anything to your cart yet!",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                ),
+                                SizedBox(height: 32),
+                              ],
+                            ),
+                          ),
+                        ),
+                  Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Delivery",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text("Free delivery from \$30")
+                            ],
+                          ),
+                          Text(
+                            "\$${dashboardProvider.totalAmout}",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  PaymentPlatformSelector(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: PayButton(
+                      title: "Pay",
+                      subtitle: "24 min. \$${dashboardProvider.count}",
+                      onPressed: () {
+                        dashboardProvider.onPay(context);
+                        // Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -174,7 +196,7 @@ class CartItemRow extends StatelessWidget {
                   "",
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
-                return Image.asset(AppAssets.app_logo, fit: BoxFit.cover);
+                return Image.asset(AppAssets.app_launcher, fit: BoxFit.cover);
               },
             ),
           ),

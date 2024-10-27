@@ -4,24 +4,24 @@ import 'package:sample_app/model/food_items_details.dart';
 import 'package:sample_app/res/app_assets/assetpath.dart';
 import 'package:sample_app/res/constants/text_styles.dart';
 import 'package:sample_app/viewModel/dashboard_view_model.dart';
- 
+
 import 'nutritions_info_card.dart'; // Adjust the import according to your project structure
 import 'item_counter.dart'; // Adjust the import according to your project structure
- 
+
 class FoodItemDetailsBottomSheet extends StatelessWidget {
   final Items? menuItem;
   final List<NutritionalInfo>? nutritionalInfo;
- 
+
   const FoodItemDetailsBottomSheet({
     Key? key,
     required this.menuItem,
     required this.nutritionalInfo,
   }) : super(key: key);
- 
+
   @override
   Widget build(BuildContext context) {
     final dashboardProvider = Provider.of<DashboardViewModel>(context);
- 
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
@@ -59,7 +59,7 @@ class FoodItemDetailsBottomSheet extends StatelessWidget {
                               menuItem?.imageUrl ?? "",
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(AppAssets.app_logo);
+                                return Image.asset(AppAssets.app_launcher);
                               },
                             ),
                             Padding(

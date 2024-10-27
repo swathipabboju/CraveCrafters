@@ -6,7 +6,10 @@ class AppColors {
   // static const Color black = Colors.black;
   static const Color white = Colors.white;
   static const Color orange = Colors.orange;
-  static const Color blackCode = Color(0x1F1F1F); // Added color #8ac6fc
+  static const Color blackCode = Color(0xFF1F1F1F);
+  static const Color blue =  Color(0xFF87C6FE);
+  static const Color voilet =  Color(0xFFCBCAFF);
+ 
   
   
   static const MaterialColor appbarSwatch = MaterialColor(
